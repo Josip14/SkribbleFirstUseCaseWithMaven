@@ -68,14 +68,6 @@ public class Main {
                 lastNameTextBox.setValue(persons.get(i).getLastName());
                 PDComboBox countryComboBox = (PDComboBox) acroForm.getField("Country Combo Box");
                 countryComboBox.setValue(persons.get(i).getEmail());
-                //System.out.println(field.getValueAsString());
-
-                    // just to test for an other pdf document
-                /**PDTextField firstNameTextBox = (PDTextField) acroForm.getField( "Name_First" );
-                firstNameTextBox.setValue(persons.get(i).getFirstName());
-                PDTextField lastNameTextBox = (PDTextField) acroForm.getField("Name_Last");
-                lastNameTextBox.setValue(persons.get(i).getLastName());
-                 */
 
             }
             // Save and close the filled out form.
