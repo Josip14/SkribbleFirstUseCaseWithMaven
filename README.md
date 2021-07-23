@@ -6,7 +6,8 @@ What are we doing here?
 - finally every pdf which is filled out differently gets saved on the local machine
 
 The PersonObject class can be extended as much as you have .csv file columns to be named
-you can have a look at these webpages to get more information
+you can have a look at these webpages to get more information about the hole project,
+there are informations I looked at so the application works properly
 - https://mkyong.com/java/how-to-read-and-parse-csv-file-in-java/
 - https://svn.apache.org/viewvc/pdfbox/trunk/examples/src/main/java/org/apache/pdfbox/examples/interactive/form/
 - https://svn.apache.org/viewvc/pdfbox/trunk/examples/src/main/java/org/apache/pdfbox/examples/interactive/form/FillFormField.java?revision=1873147&view=markup  
