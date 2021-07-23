@@ -2,8 +2,10 @@ import com.opencsv.bean.CsvToBeanBuilder;
 import com.opencsv.exceptions.CsvException;
 import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDDocumentCatalog;
 import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
 import org.apache.pdfbox.pdmodel.interactive.form.PDComboBox;
+import org.apache.pdfbox.pdmodel.interactive.form.PDField;
 import org.apache.pdfbox.pdmodel.interactive.form.PDTextField;
 
 import java.io.File;
@@ -22,6 +24,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the file path to your CSV document: ");
         String csvFilePath = scanner.nextLine();
+
         // we make out of the rows of the .csv file an object and can get them from there
         List<PersonObject> persons = new CsvToBeanBuilder(new FileReader(csvFilePath))
                 .withType(PersonObject.class)
@@ -33,8 +36,8 @@ public class Main {
         //example for the pdf file path C:\\Users\\41786\\OneDrive\\Desktop\\FormField.pdf
 
         // here we see what the names of the form fields are, we need them so we can write on them
-        /**
-        String formTemplate = "C:\\Users\\41786\\OneDrive\\Desktop\\FormField.pdf";
+
+        /**String formTemplate = "C:\\Users\\41786\\OneDrive\\Desktop\\FormField.pdf";
         PDDocument pdfDocument = Loader.loadPDF(new File(pdfFilePath));
         PDDocumentCatalog documentCatalog = pdfDocument.getDocumentCatalog();
         PDAcroForm acroForm1 = documentCatalog.getAcroForm();
