@@ -20,7 +20,7 @@ public class Main {
         //.csv file path
         // example for the .csv file path C:\\Users\\41786\\OneDrive\\Desktop\\Daten.csv
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter the file path from your CSV document: ");
+        System.out.println("Enter the file path to your CSV document: ");
         String csvFilePath = scanner.nextLine();
         // we make out of the rows of the .csv file an object and can get them from there
         List<PersonObject> persons = new CsvToBeanBuilder(new FileReader(csvFilePath))
@@ -32,16 +32,14 @@ public class Main {
         String pdfFilePath = scanner.nextLine();
         //example for the pdf file path C:\\Users\\41786\\OneDrive\\Desktop\\FormField.pdf
 
-        // here we can see how many fields our PDF with form fields has
+        // here we see what the names of the form fields are, we need them so we can write on them
         /**
         String formTemplate = "C:\\Users\\41786\\OneDrive\\Desktop\\FormField.pdf";
         PDDocument pdfDocument = Loader.loadPDF(new File(pdfFilePath));
         PDDocumentCatalog documentCatalog = pdfDocument.getDocumentCatalog();
         PDAcroForm acroForm1 = documentCatalog.getAcroForm();
         List<PDField> fields = acroForm1.getFields();
-        System.out.println(fields.size() + " top-level fields were found on the form");
-
-        // here we see what the names of the fields are, we need them so we can fill them out
+        // here we print the names of the fields out so we see what the names are from it
         for (PDField field : fields) {
             System.out.println(field.getPartialName());
             System.out.println(field.getValueAsString());
@@ -78,8 +76,8 @@ public class Main {
 
             }
             // Save and close the filled out form.
-            //saving C:\\Users\\41786\\OneDrive\\Desktop
-            //pdfDocument1.save(savingPath + "\\"+ persons.get(i).getFirstName() + ".pdf");
+            //savingPath example C:\\Users\\41786\\OneDrive\\Desktop
+            pdfDocument1.save(savingPath + "\\"+ persons.get(i).getFirstName() + ".pdf");
             }
         }
     }

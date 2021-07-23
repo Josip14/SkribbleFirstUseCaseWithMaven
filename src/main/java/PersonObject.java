@@ -9,6 +9,17 @@ import com.opencsv.bean.CsvBindByPosition;
 
 public class PersonObject {
 
+    /**
+     * If we got a .csv file that looks like this
+     * firstname, lastname, email, ... .. we can extend this
+     * Michael, Jordan, m.jordan@gmail.com, .... extendable
+     * Bart, Simpson, b.simpson@gmail.com
+     *
+     * Position 0 = firstname, Michael, Bart
+     * Position 1 = lastname, Jordan, Simpson
+     * Position 2 = email, m.jordan@gmail.com, b.simpson@gmail.com
+     */
+
     @CsvBindByPosition(position = 0)
     private String firstName;
 
