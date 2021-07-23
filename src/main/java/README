@@ -1,0 +1,10 @@
+For reading the CSV file I'm using here openCSV, you have to download it from https://sourceforge.net/projects/opencsv/
+Add the .jar to the project settings and apply them then you need the others to, so everything works smoothly
+You need to download commons-lang3.jar, commons-text.jar, commons-beanutils.jar, commons-logging.jar
+and commons-collections4:jar.
+You can find it on this website https://commons.apache.org/
+When you downloaded every of the above:
+1. unzip the folders and save them on a place where you can find it or in the same folder as you are working with
+2. go to file -> project structure -> click on the "+" -> java -> go to the unzipped folders ->
+    click for every download always once the .jar and apply it.
+3. when this is done then the code should work properly
