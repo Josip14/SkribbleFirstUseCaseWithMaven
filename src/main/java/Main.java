@@ -17,7 +17,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException, CsvException {
+    public static void main(String[] args) throws IOException {
 
         //.csv file path
         // example for the .csv file path C:\\Users\\41786\\OneDrive\\Desktop\\Daten.csv
@@ -50,13 +50,12 @@ public class Main {
         System.out.println("Enter the path to the folder where the documents should be saved: ");
         //saving example C:\\Users\\41786\\OneDrive\\Desktop
         String savingPath = scanner.nextLine();
+        for (int i = 1; i<persons.size(); i++){
+            try (PDDocument pdfDocument1 = Loader.loadPDF(new File(pdfFilePath))) {
+                // get the document catalog
+                PDAcroForm acroForm = pdfDocument1.getDocumentCatalog().getAcroForm();
 
-        try (PDDocument pdfDocument1 = Loader.loadPDF(new File(pdfFilePath))) {
-            // get the document catalog
-            PDAcroForm acroForm = pdfDocument1.getDocumentCatalog().getAcroForm();
-
-            // as there might not be an acroForm entry a null check is necessary
-            for (int i = 1; i<persons.size(); i++){
+                // as there might not be an acroForm entry a null check is necessary
                 if (acroForm != null) {
 
                 // Retrieve an individual field and set its value.
@@ -69,14 +68,6 @@ public class Main {
                 PDComboBox countryComboBox = (PDComboBox) acroForm.getField("Country Combo Box");
                 countryComboBox.setValue(persons.get(i).getEmail());
                 //System.out.println(field.getValueAsString());
-
-                    // just to test for an other pdf document
-                /**PDTextField firstNameTextBox = (PDTextField) acroForm.getField( "Name_First" );
-                firstNameTextBox.setValue(persons.get(i).getFirstName());
-                PDTextField lastNameTextBox = (PDTextField) acroForm.getField("Name_Last");
-                lastNameTextBox.setValue(persons.get(i).getLastName());
-                 */
-
             }
             // Save and close the filled out form.
             //savingPath example C:\\Users\\41786\\OneDrive\\Desktop
