@@ -1,4 +1,4 @@
-#Skribble programmatically filling out PDF's with form fields using a .csv file
+## Skribble programmatically filling out PDF's with form fields using a .csv file
 What are we doing here?
 - we make an application that takes 3 arguments(csvFilePath, pdfFilePath, savingLocation)
 - the .csv file gets transformed into an object so we can easily use it
