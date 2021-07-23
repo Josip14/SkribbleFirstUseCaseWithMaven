@@ -18,7 +18,7 @@ public class Main {
     public static void main(String[] args) throws IOException, CsvException {
 
         //.csv file path
-        String fileName = "C:\\Users\\41786\\OneDrive\\Desktop\\Daten.csv";
+        // example for the .csv file path C:\\Users\\41786\\OneDrive\\Desktop\\Daten.csv
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the file path from your CSV document: ");
         String csvFilePath = scanner.nextLine();
@@ -28,9 +28,9 @@ public class Main {
                 .build()
                 .parse();
 
-        //persons.forEach(x -> System.out.println(x.getEmail().substring(0,x.getEmail().length()-2)));
         System.out.println("Enter the file path to your PDF file which should be filled out: ");
         String pdfFilePath = scanner.nextLine();
+        //example for the pdf file path C:\\Users\\41786\\OneDrive\\Desktop\\FormField.pdf
 
         // here we can see how many fields our PDF with form fields has
         String formTemplate = "C:\\Users\\41786\\OneDrive\\Desktop\\FormField.pdf";
@@ -46,18 +46,20 @@ public class Main {
             System.out.println(field.getValueAsString());
         }*/
         System.out.println("Enter the path to the folder where the documents should be saved: ");
+        //saving example C:\\Users\\41786\\OneDrive\\Desktop
         String savingPath = scanner.nextLine();
 
         try (PDDocument pdfDocument1 = Loader.loadPDF(new File(pdfFilePath))) {
             // get the document catalog
             PDAcroForm acroForm = pdfDocument1.getDocumentCatalog().getAcroForm();
 
-            // as there might not be an AcroForm entry a null check is necessary
+            // as there might not be an acroForm entry a null check is necessary
             for (int i = 1; i<persons.size(); i++){
                 if (acroForm != null) {
 
                 // Retrieve an individual field and set its value.
                     // We can add as much as there are form field to fill them out.
+                    // we can retrieve the names of the form fields with the code above with the forLoop
                 PDTextField firstNameTextBox = (PDTextField) acroForm.getField( "Given Name Text Box" );
                 firstNameTextBox.setValue(persons.get(i).getFirstName());
                 PDTextField lastNameTextBox = (PDTextField) acroForm.getField("Family Name Text Box");
@@ -74,10 +76,9 @@ public class Main {
                  */
 
             }
-
             // Save and close the filled out form.
-            //pdfDocument1.save("C:\\Users\\41786\\OneDrive\\Desktop\\"+persons.get(i).getFirstName()+".pdf");
-            pdfDocument1.save(savingPath + "\\"+ persons.get(i).getFirstName() + ".pdf");
+            //saving C:\\Users\\41786\\OneDrive\\Desktop
+            //pdfDocument1.save(savingPath + "\\"+ persons.get(i).getFirstName() + ".pdf");
             }
         }
     }
