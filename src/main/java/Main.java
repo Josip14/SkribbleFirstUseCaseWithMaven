@@ -33,8 +33,9 @@ public class Main {
         //example for the pdf file path C:\\Users\\41786\\OneDrive\\Desktop\\FormField.pdf
 
         // here we can see how many fields our PDF with form fields has
+        /**
         String formTemplate = "C:\\Users\\41786\\OneDrive\\Desktop\\FormField.pdf";
-        /**PDDocument pdfDocument = Loader.loadPDF(new File(pdfFilePath));
+        PDDocument pdfDocument = Loader.loadPDF(new File(pdfFilePath));
         PDDocumentCatalog documentCatalog = pdfDocument.getDocumentCatalog();
         PDAcroForm acroForm1 = documentCatalog.getAcroForm();
         List<PDField> fields = acroForm1.getFields();
