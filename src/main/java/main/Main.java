@@ -32,7 +32,7 @@ public class Main {
         PDAcroForm acroForm1 = documentCatalog.getAcroForm();
         List<PDField> fields = acroForm1.getFields();
 
-        // here we print the names of the fields out so we see what the names are from it
+        // here we print the order of the formFileds so we know how the .csv file should look like
         /**for(int i = 0; i<fields.size(); i++){
          System.out.println(fields.get(i).getPartialName());
         }*/
@@ -53,6 +53,6 @@ public class Main {
                 }
             }
         }
-        System.out.println("Successfully filled all PDF files!!!");
+        System.out.println("Successfully filled out and saved for each person in this folder: "+args[2]);
     }
 }
