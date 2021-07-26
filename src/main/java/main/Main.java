@@ -21,36 +21,35 @@ public class Main {
         try (CSVReader reader = new CSVReader(new FileReader(args[0]))) {
             persons = reader.readAll();
             /**
-             * See what the the reader outputs
+             * See what the reader outputs
              * persons.forEach(x -> System.out.println(Arrays.toString(x)));
              */
         }
-        // example of a pdf file path with formFields args[1]-> "C:\\Users\\41786\\OneDrive\\Desktop\\FormField.pdf";
-        // need to set the arguments
-        PDDocument pdfDocument = Loader.loadPDF(new File(args[1]));
-        PDDocumentCatalog documentCatalog = pdfDocument.getDocumentCatalog();
-        PDAcroForm acroForm1 = documentCatalog.getAcroForm();
-        List<PDField> fields = acroForm1.getFields();
 
         // here we print the order of the formFileds so we know how the .csv file should look like
         /**for(int i = 0; i<fields.size(); i++){
          System.out.println(fields.get(i).getPartialName());
         }*/
-
         for (int i = 1; i<persons.size(); i++){
-            try (PDDocument pdfDocument1 = Loader.loadPDF(new File(args[1]))) {
-                // get the document catalog
-                PDAcroForm acroForm = pdfDocument1.getDocumentCatalog().getAcroForm();
-                // as there might not be an acroForm entry a null check is necessary
-                if (acroForm != null) {
-                    //We get the fields and set their values to the values of the .csv file
-                    for (int j = 0; j < fields.size(); j++) {
-                        acroForm.getField(fields.get(j).getPartialName()).setValue(persons.get(i)[j]);
-                    }
-                    // Save the filled out PDF
-                    //savingPath example args[2] ->  C:\\Users\\41786\\OneDrive\\Desktop
-                    pdfDocument1.save(args[2] + "\\"+ persons.get(i)[0] + ".pdf");
+            try {
+                // example of a pdf file path with formFields args[1]-> "C:\\Users\\41786\\OneDrive\\Desktop\\FormField.pdf";
+                // need to set the arguments
+                PDDocument pdfDocument = Loader.loadPDF(new File(args[1]));
+                PDDocumentCatalog documentCatalog = pdfDocument.getDocumentCatalog();
+                PDAcroForm acroForm = documentCatalog.getAcroForm();
+                List<PDField> fields = acroForm.getFields();
+
+                // set the values of the .csv file into the form fields
+                for (int j = 0; j < persons.get(i).length; j++) {
+                    acroForm.getField(fields.get(j).getPartialName()).setValue(persons.get(i)[j]);
                 }
+
+                // Save the filled out PDF
+                // savingPath example args[2] ->  C:\\Users\\41786\\OneDrive\\Desktop
+                pdfDocument.save(args[2] + "\\"+ persons.get(i)[0] + ".pdf");
+
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
         System.out.println("Successfully filled out and saved for each person in this folder: "+args[2]);
