@@ -43,12 +43,17 @@ public class Main {
 
                 // Check for the right length of the rows so it gets filled correctly else we see which row is not complete
                 if (persons.get(i).length < persons.get(0).length) {
-                    System.out.println("Row number " + i + " is not complete and can cause false filling of the form fields");
+                    System.out.println("Row number " + i + " is not complete and can cause false filling of the form fields in the PDF: "
+                            + (persons.get(0).length - persons.get(i).length) + " argument(s) is/are missing");
+                }
+                else if (persons.get(i).length > persons.get(0).length){
+                    System.out.println("Row number " + i + " has too much arguments and causes an error in the PDF: "
+                            + (persons.get(i).length - persons.get(0).length) + " argument(s) is/are redundant" );
                 }
                 // set the values of the .csv file into the form fields
                 for (int j = 0; j < persons.get(i).length; j++) {
                     acroForm.getField(fields.get(j).getPartialName()).setValue(persons.get(i)[j]);
-                    }
+                }
 
                 // Save the filled out PDF
                 // savingPath example args[2] ->  C:\\Users\\41786\\OneDrive\\Desktop
@@ -58,6 +63,6 @@ public class Main {
                 e.printStackTrace();
             }
         }
-        System.out.println("Successfully filled out and saved for each person in this folder: "+args[2]);
+        System.out.println("Successfully filled out and saved each person in this folder: "+args[2]);
     }
 }
