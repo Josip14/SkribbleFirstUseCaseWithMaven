@@ -50,7 +50,6 @@ public class Main {
                     acroForm.getField(fields.get(j).getPartialName()).setValue(persons.get(i)[j]);
                     }
 
-
                 // Save the filled out PDF
                 // savingPath example args[2] ->  C:\\Users\\41786\\OneDrive\\Desktop
                 pdfDocument.save(args[2] + "\\"+ persons.get(i)[0] + ".pdf");
