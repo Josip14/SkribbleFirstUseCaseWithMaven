@@ -26,10 +26,12 @@ public class Main {
              */
         }
 
-        // here we print the order of the formFileds so we know how the .csv file should look like
-        /**for(int i = 0; i<fields.size(); i++){
+        // here we print the order of the formFields so we know how the .csv file should look like
+        /**
+         for(int i = 0; i<fields.size(); i++){
          System.out.println(fields.get(i).getPartialName());
         }*/
+
         for (int i = 1; i<persons.size(); i++){
             try {
                 // example of a pdf file path with formFields args[1]-> "C:\\Users\\41786\\OneDrive\\Desktop\\FormField.pdf";
@@ -39,10 +41,15 @@ public class Main {
                 PDAcroForm acroForm = documentCatalog.getAcroForm();
                 List<PDField> fields = acroForm.getFields();
 
+                // Check for the right length of the rows so it gets filled correctly else we see which row is not complete
+                if (persons.get(i).length < persons.get(0).length) {
+                    System.out.println("Row number " + i + " is not complete and can cause false filling of the form fields");
+                }
                 // set the values of the .csv file into the form fields
                 for (int j = 0; j < persons.get(i).length; j++) {
                     acroForm.getField(fields.get(j).getPartialName()).setValue(persons.get(i)[j]);
-                }
+                    }
+
 
                 // Save the filled out PDF
                 // savingPath example args[2] ->  C:\\Users\\41786\\OneDrive\\Desktop
