@@ -16,22 +16,27 @@ public class Main {
 
     public static void main(@org.jetbrains.annotations.NotNull String[] args) throws IOException, CsvException {
 
-        // example of the .csv file path args[0]-> "C:\\Users\\41786\\OneDrive\\Desktop\\Data.csv";
+        /**
+         * example of the .csv file path args[0]-> "C:\\Users\\41786\\OneDrive\\Desktop\\Data.csv";
+         */
         List<String[]> persons;
         try (CSVReader reader = new CSVReader(new FileReader(args[0]))) {
             persons = reader.readAll();
         }
-
         /**
          * See what the reader outputs
          * persons.forEach(x -> System.out.println(Arrays.toString(x)));
          */
 
-        // Start iteration from second row because the first is the header
+        /**
+         * Start iteration from second row because the first is the header
+         */
         for (int i = 1; i<persons.size(); i++){
             try {
-                // example of a pdf file path with formFields args[1]-> "C:\\Users\\41786\\OneDrive\\Desktop\\FormField.pdf";
-                // need to set the arguments
+                /**
+                 * example of a pdf file path with formFields args[1]-> "C:\\Users\\41786\\OneDrive\\Desktop\\FormField.pdf";
+                 */
+
                 PDDocument pdfDocument = Loader.loadPDF(new File(args[1]));
                 PDDocumentCatalog documentCatalog = pdfDocument.getDocumentCatalog();
                 PDAcroForm acroForm = documentCatalog.getAcroForm();
@@ -39,21 +44,30 @@ public class Main {
 
                 /**
                  * If you want to check what the order and what type the fields have uncomment the code below
+                 */
+
+                /**
                 for (int l = 0; l<fields.size();l++){
                     System.out.println(fields.get(l).getPartialName());
                     System.out.println(fields.get(l).getFieldType());
                 }
                  */
 
-                // Check for the right length of the rows so it gets filled correctly else we see which row is not complete
+                /**
+                 * Check for too short rows and give an information where it is and that it can cause errors
+                 * because the form filling happens in order and if there are some missing  arguments everything gets postponed
+                 */
                 if (persons.get(i).length < persons.get(0).length) {
-                    System.out.println("Row number " + i + " is not complete and can cause false filling of the form fields in the PDF: "
+                    System.out.println("Hint: row number " + i + " is not complete and can cause false filling of the form fields in the PDF: "
                             + (persons.get(0).length - persons.get(i).length) + " argument(s) is/are missing");
                 }
-
+                /**
+                 * Check if the input row has to much arguments and in which row it causes an error
+                 */
                 else if (persons.get(i).length > persons.get(0).length){
                     System.out.println("Row number " + i + " has too much arguments and causes an error in the PDF: "
                             + (persons.get(i).length - persons.get(0).length) + " argument(s) is/are redundant" );
+                    System.out.println(persons.get(i)[0] + " row number: " + i + " is NOT saved");
                 }
 
                 /**
@@ -70,11 +84,14 @@ public class Main {
                  * the i is just to prevent errors if there are more the one of the same name, but you can change it as you like
                  */
                 pdfDocument.save(args[2] + "\\" + persons.get(i)[0] + " " + i + ".pdf");
-
+                System.out.println(persons.get(i)[0] +" row number: "+ i + " is saved");
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        System.out.println("Successfully filled out and saved each person in this folder: "+args[2]);
+        /**
+         * If all fields got filled out, let the user know that it was successfully
+         */
+        System.out.println("Successfully filled out and saved all PDF's for each person in this folder: "+args[2]);
     }
 }
